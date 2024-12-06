@@ -21,7 +21,9 @@ public class Main {
             System.exit(1);
         }
 
-        System.out.println();
-        System.out.printf(floorPlan);
+        FloorSolver solver = new FloorSolver(floorPlan);
+        System.out.println("Loop positions found: " + solver.determineLoopPositions());
     }
+
+
 }
