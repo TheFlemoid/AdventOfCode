@@ -21,8 +21,15 @@ public class Main {
             System.exit(1);
         }
 
+        long startTime = System.nanoTime();
         FloorSolver solver = new FloorSolver(floorPlan);
         System.out.println("Loop positions found: " + solver.determineLoopPositions());
+        long endTime = System.nanoTime();
+
+        // Determine and print execution time of the simulation, for fun.
+        long duration = endTime - startTime;
+        double millisToSimulate = duration / 1000000f;
+        System.out.printf("Simulation time: %.3f\n", millisToSimulate);
     }
 
 
