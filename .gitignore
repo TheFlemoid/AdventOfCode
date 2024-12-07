@@ -1,0 +1,12 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Build artifacts
+*.jar
+
+# Puzzle input data, the creater of AoC has stated he does
+# not want individuals input data to be committed or publicized.
+*.input
