@@ -46,6 +46,26 @@ public class UpdateSolver {
         return sumOfMiddleDigits;
     }
 
+    public int checkAndFixValuesAndAddMiddles() {
+        int sumOfMiddleDigits = 0;
+        List<Integer[]> nonConformingUpdate = new ArrayList<>();
+
+        for (int i = 0; i < pageUpdateList.size(); i++) {
+            // If the update follows the rules, continue
+            if (!checkUpdateFollowsRules(pageUpdateList.get(i))) {
+                nonConformingUpdate.add(pageUpdateList.get(i));
+            }
+        }
+
+        for (int i = 0; i < nonConformingUpdate.size(); i++) {
+            Integer[] correctedRule = fixUpdateFollowsRules(nonConformingUpdate.get(i));
+            int midIndex = correctedRule.length / 2;
+            sumOfMiddleDigits += correctedRule[midIndex];
+        }
+
+        return sumOfMiddleDigits;
+    }
+
     /**
      * Initializes the update rule array list with values from the file at the provided updateRulesPath
      */
@@ -130,6 +150,54 @@ public class UpdateSolver {
     }
 
     /**
+     * Corrects the param Integer[] page update so that it conforms to all page update rules
+     *
+     * @param pageUpdate Integer[] update rule to correct
+     * @return Integer[] of the corrected rule
+     */
+    private Integer[] fixUpdateFollowsRules(Integer[] pageUpdate) {
+        boolean followsRules = false;
+        while(!followsRules) {
+            followsRules = true;
+            for (int i = 0; i < updateRuleList.size() && followsRules; i++) {
+                boolean shouldBreak = false;
+                // If the update does not contain either of the rule pages, ignore this rule
+                if (!containsInt(pageUpdate, updateRuleList.get(i).getFirstPage()) ||
+                    !containsInt(pageUpdate, updateRuleList.get(i).getSecondPage())) {
+                    continue;
+                }
+
+                for (int j = 0; j < pageUpdate.length && !shouldBreak; j++) {
+                    // If we find the first page first, we're good.  Otherwise swap the index of the second and
+                    // first pages.
+                    if (pageUpdate[j] == updateRuleList.get(i).getFirstPage()) {
+                        followsRules = true;
+                        shouldBreak = true;
+                    } else if (pageUpdate[j] == updateRuleList.get(i).getSecondPage()) {
+                        // If a rule failed (aka we found the second number first), find the location of the
+                        // first number of the rule, and swap the two indexes in the rule.
+                        followsRules = false;
+                        shouldBreak = true;
+
+                        System.out.printf("Attempting to fix array: ");
+                        for (int k = 0; k < pageUpdate.length; k++) {
+                            System.out.printf("%d ", pageUpdate[k]);
+                        }
+                        System.out.printf(" Against rule: %d , %d\n", updateRuleList.get(i).getFirstPage(), updateRuleList.get(i).getSecondPage());
+
+                        int tmpPage = pageUpdate[j];
+                        int firstPageIndex = findIndexOfInteger(pageUpdate, updateRuleList.get(i).getFirstPage());
+                        pageUpdate[j] = pageUpdate[firstPageIndex];
+                        pageUpdate[firstPageIndex] = tmpPage;
+                    }
+                }
+            }
+        }
+
+        return pageUpdate;
+    }
+
+    /**
      * Returns true if the param key is contained in the param intArray, false otherwise
      *
      * @param intArray Integer array to check
@@ -138,6 +206,23 @@ public class UpdateSolver {
      */
     private boolean containsInt(Integer[] intArray, int key) {
         return Arrays.stream(intArray).anyMatch(n -> n == key);
+    }
+
+    /**
+     * Returns the index of the value of key in the param array, or -1 if the key is not in the array.
+     *
+     * @param intArray
+     * @param key
+     * @return
+     */
+    private int findIndexOfInteger(Integer[] intArray, int key) {
+        int retVal = -1;
+        for (int i = 0; i < intArray.length; i++) {
+            if (intArray[i] == key) {
+                retVal = i;
+            }
+        }
+        return retVal;
     }
 
     /**
