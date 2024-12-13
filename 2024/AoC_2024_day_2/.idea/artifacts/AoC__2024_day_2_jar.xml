@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AoC-_2024_day_2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AoC__2024_day_2_jar</output-path>
+    <root id="archive" name="AoC-_2024_day_2.jar">
+      <element id="module-output" name="AoC-_2024_day_2" />
+    </root>
+  </artifact>
+</component>
