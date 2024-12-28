@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PersonalJavaUtilities">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/PersonalJavaUtilities.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
