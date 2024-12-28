@@ -25,6 +25,9 @@ public class WordsearchSolver {
         System.out.printf("Total number of \'XMAS\' matches found: %d\n", matches);
     }
 
+    /**
+     * Solves Part Two of Day 4s problem
+     */
     public void solvePartTwo() {
         int matches = 0;
 
