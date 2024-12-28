@@ -1,3 +1,6 @@
+
+import com.dobby.utils.struct.Pair;
+
 public enum Direction {
     UP,
     UP_RIGHT,
@@ -9,6 +12,7 @@ public enum Direction {
     UP_LEFT;
 
     private Direction() {
-
     }
+
+
 }
