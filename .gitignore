@@ -12,4 +12,6 @@ build
 *.input
 
 #IntelliJ idea files
-*.idea
+.idea/
+*/out/*
+out/
