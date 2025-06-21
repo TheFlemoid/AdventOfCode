@@ -10,3 +10,9 @@ build
 # Puzzle input data, the creater of AoC has stated he does
 # not want individuals input data to be committed or publicized.
 *.input
+
+#IntelliJ idea files
+**/.idea
+**/out
+./**/.idea/**
+./**/out/**
